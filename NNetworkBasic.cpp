@@ -185,14 +185,6 @@ void NeuralNetwork::trainNeuralNetwork(float* trainInput, float* trainOutput, fl
 		for (int i = nLayers - 2; i >= 1; i--) layers[i].layerBackPropogationErrorCalculating(trainOutput, layers[i + 1], false, NNSigmoid);
 
 		layers[1].layerBackPropogationWeightsCalculating(trainSpeed, momentum, layers[0], NNSigmoid, true);
-		for (int i = 2; i < nLayers; i++)layers[i].layerBackPropogationWeightsCalculating(trainSpeed, momentum, layers[i - 1], NNSigmoid, false);
+		for (int i = 2; i < nLayers; i++)layers[1].layerBackPropogationWeightsCalculating(trainSpeed, momentum, layers[i - 1], NNSigmoid, false);
 	}
 }
-float NeuralNetwork::calculateErrorPercentage(float* trainOutput) {
-		float k = 0;
-		for (int i = 0; i < layers[nLayers - 1].getLayerSize(); i++) {
-			if (NNSigmoid == true) k += float(pow(sigmoid(layers[nLayers - 1].getValue(i)) - trainOutput[i], 2)) / layers[nLayers - 1].getLayerSize();
-			else k += float(pow(neurotan(layers[nLayers - 1].getValue(i)) - trainOutput[i], 2)) / layers[nLayers - 1].getLayerSize();
-		}
-		return k;
-	}
