@@ -73,5 +73,6 @@ public:
 	float* calculateNeuralNetwork(float* inputData);
 
 	void trainNeuralNetwork(float* trainInput, float* trainOutput, float trainSpeed, float momentum);
+
 	float calculateErrorPercentage(float* trainOutput);
 };
